@@ -1,0 +1,66 @@
+int led =7;
+int trigpin = 2;
+int echopin = 4;
+int distance;
+float duration;
+float cm;
+
+//Motor A
+const int inputPin1  = 10;    
+const int inputPin2  = 12;    
+
+//Motor B
+const int inputPin4  = 9;    
+const int inputPin3  = 8;    
+int en=5;
+int en1=11;
+void setup()
+{
+  pinMode(led, OUTPUT);
+ pinMode(trigpin, OUTPUT);
+ pinMode(echopin, INPUT);
+
+
+    pinMode(inputPin1, OUTPUT);
+    pinMode(inputPin2, OUTPUT);
+    pinMode(inputPin3, OUTPUT);
+    pinMode(inputPin4, OUTPUT);
+    pinMode(en,OUTPUT);
+    pinMode(en1,OUTPUT);
+    
+   
+}
+void loop()
+{
+ analogWrite(en,200);
+ analogWrite(en1,145);
+ 
+ digitalWrite(trigpin, LOW);
+ delay(2);
+ digitalWrite(trigpin, HIGH);
+ delayMicroseconds(10);
+ digitalWrite(trigpin, LOW);
+ duration = pulseIn(echopin, HIGH);
+ cm = (duration/58.82);
+ distance = cm;
+ 
+ if(distance<20)
+ {
+    digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
+    digitalWrite(inputPin1, HIGH);
+    digitalWrite(inputPin2, LOW);
+    digitalWrite(inputPin4, LOW);
+    digitalWrite(inputPin3, HIGH);  
+  }  
+ 
+ else{
+  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
+   
+    digitalWrite(inputPin1, LOW);
+    digitalWrite(inputPin2, LOW);
+    digitalWrite(inputPin3, LOW);
+    digitalWrite(inputPin4, LOW);  
+ }
+     
+   
+}
